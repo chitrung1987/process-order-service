@@ -83,6 +83,8 @@ Endpoints:
   --role-name ecsTaskExecutionRole \
   --policy-arn arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
    ```
+After successful, you will can see this dashboard on aws
+![ECS Fargate Architecture](./ecs-fargate.png)
 
 ---
 
