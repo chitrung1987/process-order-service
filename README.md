@@ -1,1 +1,140 @@
 # process-order-service
+## 1. Project Structure
+
+> **Note:** We don’t yet have separate customer-service or shop-service microservices.  
+> For now, customer and shop tables exist only to provide dump data.
+
+```
+src/
+├── controller/        # REST controllers
+├── service/           # Business logic
+├── dao/               # Data-access layer
+├── exception/         # Global exceptions & error responses
+└── diagram/           # ERD, sequence and use-case diagrams
+```
+
+- **controller layer**  
+  Contains all Spring MVC controllers (entry points for HTTP requests).
+
+- **service layer**  
+  Implements core business logic.
+
+- **dao layer**  
+  Interacts with PostgreSQL via Spring Data / JDBC templates.
+
+- **exception package**  
+  Catches & handles exceptions globally, returning standardized error payloads.
+
+- **diagram folder**  
+  Contains `*.png` files for your ERD, sequence and use-case diagrams.
+
+---
+
+## 2. Testing
+
+1. Clone the repo and run:
+
+   ```bash
+   docker-compose up -d
+   ```
+      This starts the application and provisions the database.
+Endpoints:
+  - http://localhost:8080/api/orders
+  - http://localhost:8080/api/orders/{id}/status
+  - http://localhost:8080/api/orders/{id}
+
+2. Make the smoke-test script executable and run it:
+
+   ```bash
+   chmod +x test-api.sh
+   ./test-api.sh
+   ```
+
+3. Execute unit tests:
+
+   ```bash
+   mvn test
+   ```
+
+4. (AWS) Import `postman/collection.json` into Postman for API testing.
+
+5. For load/stress testing, use JMeter
+
+---
+
+## 3. Coding, Naming & Technology Standards
+
+- **Language / Framework**  
+  Java 17 + Spring Boot 3.4
+
+- **Persistence**  
+  PostgreSQL
+
+- **Migrations**  
+  Liquibase changelogs  
+  - One “master” changelog  
+  - Contains `createTable`, `insert`, and `resync sequence` changesets
+
+- **Containerization**  
+  - Multi-stage `Dockerfile`  
+  - Configuration via environment variables
+
+- **AWS**  
+  - Container images in ECR  
+  - ECS / Fargate tasks
+
+- **REST Naming**  
+  - **Resources are plural:** `/customers`, `/shops/nearby`, `/orders`  
+  - **Use HTTP verbs**: `POST`, `GET`, `DELETE`
+
+- **Logging**  
+  SLF4J + Logback with sensible levels:  
+  - `INFO` for normal operations  
+  - `WARN` for recoverable issues  
+  - `ERROR` for unexpected failures
+
+---
+
+## 4. Future Security Solution
+
+We’ll integrate Spring Security and an IDP (Keycloak/Okta) to manage keys, authentication & authorization:
+
+### Authentication
+
+1. **Register**  
+   - Customer submits mobile → we send OTP via SMS.  
+2. **Verify**  
+   - Customer submits OTP → we issue a JWT (expires in 1 hour).
+
+### Authorization
+
+- **Bearer JWT** in `Authorization` header on all APIs  
+- Spring Security filter validates token & populates `SecurityContext`
+
+### Other Concerns
+
+- **Transport:** TLS everywhere (HTTPS)  
+- **Secret Management:** AWS Secrets Manager for DB creds & JWT signing keys  
+- **CORS:** Only allow your mobile app’s origin
+
+---
+
+## 5. Full Services (Future)
+
+We plan three microservices:
+
+1. **Customer Service**  
+2. **Shop Service**  
+3. **Process-Order Service** (current focus)
+
+Once all three exist, the complete API surface will include:
+
+| Method | Path                                     | Description                                | Auth   | Request DTO                          | Response DTO       |
+|--------|------------------------------------------|--------------------------------------------|--------|--------------------------------------|--------------------|
+| POST   | `/api/customers`                         | Register a new customer                    | Public | `{ mobile, name, address }`          | `Customer`         |
+| POST   | `/api/auth/otp/send`                     | Send OTP to mobile                         | Public | `{ mobile }`                         | `202 Accepted`     |
+| POST   | `/api/auth/otp/verify`                   | Verify OTP & issue JWT                     | Public | `{ mobile, otp }`                    | `{ token, expires }` |
+| GET    | `/api/shops/nearby?lat={lat}&lon={lon}&limit={n}` | Find N nearest shops                       | Bearer | —                                    | `List<ShopGeoDTO>` |
+| POST   | `/api/orders`                            | Place a new order                          | Bearer | `{ shopId, menuItemId }`             | `Order`            |
+| GET    | `/api/orders/{id}/status`                | Get status, queue position & ETA           | Bearer | —                                    | `OrderStatusDTO`   |
+| DELETE | `/api/orders/{id}`                       | Cancel order (exit queue)                  | Bearer | —                                    | `204 No Content`   |
