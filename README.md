@@ -42,9 +42,9 @@ src/
    ```
       This starts the application and provisions the database.
 Endpoints:
-  - http://localhost:8080/api/orders
-  - http://localhost:8080/api/orders/{id}/status
-  - http://localhost:8080/api/orders/{id}
+  - POST http://localhost:8080/api/orders
+  - GET http://localhost:8080/api/orders/{id}/status
+  - DELETE http://localhost:8080/api/orders/{id}
 
 2. For local testing, make the smoke-test script executable and run it:
 
