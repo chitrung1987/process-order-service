@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+      http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- 1. Shops -->
+    <changeSet id="20250510-4" author="dev">
+        <insert tableName="shop">
+            <column name="id"             valueNumeric="1"/>
+            <column name="name"           value="Shop 1"/>
+            <column name="location"       value="Location 1"/>
+            <column name="max_queues"     valueNumeric="1"/>
+            <column name="latitude"       valueNumeric="10.0001"/>
+            <column name="longitude"      valueNumeric="106.0001"/>
+        </insert>
+        <insert tableName="shop">
+            <column name="id"             valueNumeric="2"/>
+            <column name="name"           value="Shop 2"/>
+            <column name="location"       value="Location 2"/>
+            <column name="max_queues"     valueNumeric="2"/>
+            <column name="latitude"       valueNumeric="10.0002"/>
+            <column name="longitude"      valueNumeric="106.0002"/>
+        </insert>
+        <insert tableName="shop">
+            <column name="id"             valueNumeric="10"/>
+            <column name="name"           value="Shop 10"/>
+            <column name="location"       value="Location 10"/>
+            <column name="max_queues"     valueNumeric="3"/>
+            <column name="latitude"       valueNumeric="10.0010"/>
+            <column name="longitude"      valueNumeric="106.0010"/>
+        </insert>
+    </changeSet>
+
+    <!-- 2. Customers -->
+    <changeSet id="20250510-5" author="dev">
+        <insert tableName="customer">
+            <column name="id"         valueNumeric="1"/>
+            <column name="mobile"     value="0900000001"/>
+            <column name="name"       value="Customer 1"/>
+            <column name="address"    value="Address 1"/>
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="customer">
+            <column name="id"         valueNumeric="2"/>
+            <column name="mobile"     value="0900000002"/>
+            <column name="name"       value="Customer 2"/>
+            <column name="address"    value="Address 2"/>
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+        <insert tableName="customer">
+            <column name="id"         valueNumeric="10"/>
+            <column name="mobile"     value="0900000010"/>
+            <column name="name"       value="Customer 10"/>
+            <column name="address"    value="Address 10"/>
+            <column name="created_at" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
