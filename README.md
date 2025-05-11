@@ -110,9 +110,10 @@ After successful, you will can see this dashboard on aws
   - Container images in ECR  
   - ECS / Fargate tasks
 
-- **REST Naming**  
+- **REST Naming and convention**  
   - **Resources are plural:** `/customers`, `/shops/nearby`, `/orders`  
   - **Use HTTP verbs**: `POST`, `GET`, `DELETE`
+  - **Coding follow clean code and Unit test follow TDD**
 
 - **Logging**  
   SLF4J + Logback with sensible levels:  
