@@ -102,7 +102,8 @@ Endpoints:
   - Contains `createTable`, `insert`, and `resync sequence` changesets
 
 - **Containerization**  
-  - Multi-stage `Dockerfile`  
+  - Multi-stage `Dockerfile`
+  - Use Docker-compose to deploy or run on local
   - Configuration via environment variables
 
 - **AWS**  
