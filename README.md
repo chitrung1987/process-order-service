@@ -10,7 +10,6 @@ src/
 ├── service/           # Business logic
 ├── dao/               # Data-access layer
 ├── exception/         # Global exceptions & error responses
-└── diagram/           # ERD, sequence and use-case diagrams
 ```
 
 - **controller layer**  
