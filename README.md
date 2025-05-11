@@ -70,6 +70,17 @@ Endpoints:
 - Run push-to-ecr.sh file to push image to ECR
 - Run setup-ecs-cluster.sh to setup ecs cluster and create vpc, subnet
 - Run deploy-fargate.sh deploy task into cluster
+- Maybe after deployment the task to ecs, you will get error related to service permission. In this scenario, you can use ecs-trust.json and run 2 commands below to assign permission. Otherwise, ignore these commands
+```bash
+   aws iam create-role \
+  --role-name ecsTaskExecutionRole \
+  --assume-role-policy-document file://ecs-trust.json
+   ```
+```bash
+   aws iam attach-role-policy \
+  --role-name ecsTaskExecutionRole \
+  --policy-arn arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+   ```
 
 ## NOTE: You need to change AWS_ACCOUNT_ID to your account
 
@@ -133,7 +144,15 @@ We’ll integrate Spring Security and an IDP (Keycloak/Okta) to manage keys, aut
 
 ---
 
-## 5. Full Services (Future)
+## 5. Enhance performance
+- **Caching:** : use Redis
+- Seperate write/read database to avoid overload
+- Use CloudFront to do CDN.
+- Setup Route53 follow geolocation policy
+- Can deploy backend on multi-region to ensure HA
+
+
+## 6. Full Services (Future)
 
 We plan three microservices:
 
