@@ -46,7 +46,7 @@ Endpoints:
   - http://localhost:8080/api/orders/{id}/status
   - http://localhost:8080/api/orders/{id}
 
-2. Make the smoke-test script executable and run it:
+2. For local testing, make the smoke-test script executable and run it:
 
    ```bash
    chmod +x test-api.sh
@@ -59,7 +59,7 @@ Endpoints:
    mvn test
    ```
 
-4. (AWS) Import `coffee-shop.postman_collection.json` into Postman for API testing.
+4. (AWS) testing, Import `coffee-shop.postman_collection.json` into Postman for API testing.
 
 5. For load/stress testing, use JMeter
 
