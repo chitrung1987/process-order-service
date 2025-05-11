@@ -26,7 +26,7 @@ src/
   Use ControllerAdvice to catch & handles exceptions globally, returning standardized error payloads.
 
 - **diagram folder**  
-  Contains `*.png` files for your ERD, sequence and use-case diagrams.
+  Contains `*.png` files for your ERD, sequence and use-case diagrams. **Read explain_sequence_diagram.txt file to know detail information steps**
 
 - **deployment folder**  
   Contains script to deploy to aws ecs fargate.
