@@ -19,7 +19,7 @@ fi
 
 # ─── Configuration ────────────────────────────────────────────────────────────
 AWS_REGION="us-east-1"
-AWS_ACCOUNT_ID="122610499913"
+AWS_ACCOUNT_ID="xxxxx"
 ECR_REPOSITORY="process-order-service"
 IMAGE_NAME="process-order-service"
 IMAGE_TAG="latest"

@@ -28,6 +28,9 @@ src/
 - **diagram folder**  
   Contains `*.png` files for your ERD, sequence and use-case diagrams.
 
+- **deployment folder**  
+  Contains script to deploy to aws ecs fargate.
+
 ---
 
 ## 2. Testing
@@ -35,7 +38,8 @@ src/
 1. Clone the repo and run:
 
    ```bash
-   docker-compose up -d
+    docker compose down
+    docker compose up --build -d
    ```
       This starts the application and provisions the database.
 Endpoints:
@@ -56,13 +60,24 @@ Endpoints:
    mvn test
    ```
 
-4. (AWS) Import `postman/collection.json` into Postman for API testing.
+4. (AWS) Import `coffee-shop.postman_collection.json` into Postman for API testing.
 
 5. For load/stress testing, use JMeter
 
 ---
 
-## 3. Coding, Naming & Technology Standards
+## 3. For deployment to ecs fargate
+
+- Run push-to-ecr.sh file to push image to ECR
+- Run setup-ecs-cluster.sh to setup ecs cluster and create vpc, subnet
+- Run deploy-fargate.sh deploy task into cluster
+
+## NOTE: You need to change AWS_ACCOUNT_ID to your account
+
+
+---
+
+## 4. Coding, Naming & Technology Standards
 
 - **Language / Framework**  
   Java 17 + Spring Boot 3.4

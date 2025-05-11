@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "0580170f-898c-49da-954a-18120c9f85f2",
+		"name": "coffee-shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "446187"
+	},
+	"item": [
+		{
+			"name": "Place an order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shopId\": 1,\n    \"menuItemId\": 101,\n    \"customerId\": 1\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://54.164.3.60:8080/api/orders",
+					"protocol": "http",
+					"host": [
+						"54",
+						"164",
+						"3",
+						"60"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get order status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://54.164.3.60:8080/api/orders/{id}/status",
+					"protocol": "http",
+					"host": [
+						"54",
+						"164",
+						"3",
+						"60"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"orders",
+						"{id}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://54.164.3.60:8080/api/orders/{id}",
+					"protocol": "http",
+					"host": [
+						"54",
+						"164",
+						"3",
+						"60"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"orders",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

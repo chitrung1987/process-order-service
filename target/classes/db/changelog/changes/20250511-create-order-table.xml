@@ -1,0 +1,44 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+       http://www.liquibase.org/xml/ns/dbchangelog
+       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="20250510-3" author="dev">
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="shop_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_orders_shop"
+                             references="shop(id)"/>
+            </column>
+
+            <column name="menu_item_id"  type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id"   type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_orders_customer"
+                             references="customer(id)"/>
+            </column>
+            <column name="status"        type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="queue_number"  type="INT" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="queue_position"        type="INT"/>
+            <column name="estimated_wait_seconds" type="INT"/>
+            <column name="created_at"    type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+            </column>
+            <column name="updated_at"    type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
