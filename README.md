@@ -67,6 +67,7 @@ Endpoints:
 ---
 
 ## 3. For deployment to ecs fargate
+## NOTE: You need to change AWS_ACCOUNT_ID to your account
 
 - Run push-to-ecr.sh file to push image to ECR
 - Run setup-ecs-cluster.sh to setup ecs cluster and create vpc, subnet
@@ -82,9 +83,6 @@ Endpoints:
   --role-name ecsTaskExecutionRole \
   --policy-arn arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
    ```
-
-## NOTE: You need to change AWS_ACCOUNT_ID to your account
-
 
 ---
 
