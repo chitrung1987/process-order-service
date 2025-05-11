@@ -23,7 +23,7 @@ src/
   Interacts with PostgreSQL via Spring Data / JDBC templates.
 
 - **exception package**  
-  Catches & handles exceptions globally, returning standardized error payloads.
+  Use ControllerAdvice to catch & handles exceptions globally, returning standardized error payloads.
 
 - **diagram folder**  
   Contains `*.png` files for your ERD, sequence and use-case diagrams.
