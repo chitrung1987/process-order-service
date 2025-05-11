@@ -1,0 +1,22 @@
+1. Customer taps “Order” in the mobile app.
+
+2. Mobile App sends POST /order to the API Gateway.
+
+3. API Gateway forwards to OrderService.placeOrder(shopId, menuItemId, customerId).
+
+4. OrderService calls CustomerRepository.findById(customerId) to load the customer.
+
+5. It then calls ShopConfigService.getMaxQueues(shopId) to determine queue count.
+
+6. Next, OrderRepository.findByShopIdAndStatus(shopId, PLACED) fetches current queue.
+
+7. OrderService saves the new order via OrderRepository.save(new Order).
+
+8. Finally, it recalculates and persists updated queue metrics across orders with OrderRepository.saveAll(updatedOrders).
+
+—This flow ensures the customer is properly enqueued and the shop’s queue positions updated atomically.
+
+
+
+
+
