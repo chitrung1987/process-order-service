@@ -2,7 +2,8 @@
 ## 1. Project Structure
 
 > **Note:** We don’t yet have separate customer-service and shop-service.  
-> For now, customer and shop tables exist only to provide dump data. In reality, they should belongs to customer and shop service istead of process-order-service
+> For now, customer and shop tables exist only to provide dump data.
+> In reality, they should belongs to customer and shop service istead of process-order-service
 
 ```
 src/
