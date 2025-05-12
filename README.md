@@ -60,7 +60,7 @@ Endpoints:
    mvn test
    ```
 
-4. (AWS) testing, Import `coffee-shop.postman_collection.json` into Postman for API testing.
+4. (AWS) testing, Import `coffee-shop.postman_collection.json` into Postman for API testing. **Note: I will turn off aws version on 14 May 2025**
 
 5. For load/stress testing, use JMeter
 
